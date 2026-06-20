@@ -951,56 +951,63 @@
     const imageUrl = item => item.local ? localAsset(item.filename) : commons(item.filename);
 
     const bank = [
-      { kind: "duck", local: true, group: "duck-braised-duck-leg-with-lentils-753971", fit: "cover", filename: "openverse50/duck-braised-duck-leg-with-lentils-753971.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-braised-duck-leg-with-lentils-825900", fit: "cover", filename: "openverse50/duck-braised-duck-leg-with-lentils-825900.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-cassoulet-braised-white-bean-duck-leg-confit-garlic-sausage-pork-belly-508355", fit: "cover", filename: "openverse50/duck-cassoulet-braised-white-bean-duck-leg-confit-garlic-sausage-pork-belly-508355.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-cassoulet-of-duck-leg-lamb-sausage-house-bacon-and-cannelini-beans-785709", fit: "cover", filename: "openverse50/duck-cassoulet-of-duck-leg-lamb-sausage-house-bacon-and-cannelini-beans-785709.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-confit-duck-leg-guillaume-at-bennelong-163943", fit: "cover", filename: "openverse50/duck-confit-duck-leg-guillaume-at-bennelong-163943.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-confit-duck-leg-guillaume-at-bennelong-by-julia-322132", fit: "cover", filename: "openverse50/duck-confit-duck-leg-guillaume-at-bennelong-by-julia-322132.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-confit-duck-leg-salad-491515", fit: "cover", filename: "openverse50/duck-confit-duck-leg-salad-491515.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-confit-duck-leg-with-braised-lentils-winter-greens-and-jus-gras-bistro-958150", fit: "cover", filename: "openverse50/duck-confit-duck-leg-with-braised-lentils-winter-greens-and-jus-gras-bistro-958150.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-confit-duck-leg-with-du-puy-lentils-bistro-vue-584300", fit: "cover", filename: "openverse50/duck-confit-duck-leg-with-du-puy-lentils-bistro-vue-584300.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-confit-foie-gras-and-duck-fat-fries-at-au-fil-des-saisons-109767", fit: "cover", filename: "openverse50/duck-confit-foie-gras-and-duck-fat-fries-at-au-fil-des-saisons-109767.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-crispy-duck-leg-confit-sonoma-valley-liberty-duck-warm-mushroom-salad--499671", fit: "cover", filename: "openverse50/duck-crispy-duck-leg-confit-sonoma-valley-liberty-duck-warm-mushroom-salad--499671.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-duck-961746", fit: "cover", filename: "openverse50/duck-duck-961746.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-duck-leg-178759", fit: "cover", filename: "openverse50/duck-duck-leg-178759.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-duck-leg-480578", fit: "cover", filename: "openverse50/duck-duck-leg-480578.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-duck-leg-confit-196116", fit: "cover", filename: "openverse50/duck-duck-leg-confit-196116.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-duck-leg-confit-with-kipfler-potato-salad-and-jus-gras-jones-the-groce-22568", fit: "cover", filename: "openverse50/duck-duck-leg-confit-with-kipfler-potato-salad-and-jus-gras-jones-the-groce-22568.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-duck-leg-noodles-at-hai-ky-mi-gia-337607", fit: "cover", filename: "openverse50/duck-duck-leg-noodles-at-hai-ky-mi-gia-337607.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-duck-leg-noodles-at-hai-ky-mi-gia-619455", fit: "cover", filename: "openverse50/duck-duck-leg-noodles-at-hai-ky-mi-gia-619455.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-duck-leg-noodles-at-hai-ky-mi-gia-704231", fit: "cover", filename: "openverse50/duck-duck-leg-noodles-at-hai-ky-mi-gia-704231.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-duck-san-choi-bow-103643", fit: "cover", filename: "openverse50/duck-duck-san-choi-bow-103643.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-ginger-chili-duck-leg-crispy-sushi-rice-pickled-ginger-radish-greens-283657", fit: "cover", filename: "openverse50/duck-ginger-chili-duck-leg-crispy-sushi-rice-pickled-ginger-radish-greens-283657.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-noodles-with-stewed-duck-in-chinese-herbs-proud-peacock-aud9-545326", fit: "cover", filename: "openverse50/duck-noodles-with-stewed-duck-in-chinese-herbs-proud-peacock-aud9-545326.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-smoked-duck-leg-at-t-t-296762", fit: "cover", filename: "openverse50/duck-smoked-duck-leg-at-t-t-296762.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-speck-confit-duck-leg-guillaume-at-bennelong-105405", fit: "cover", filename: "openverse50/duck-speck-confit-duck-leg-guillaume-at-bennelong-105405.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-waterleaf-duck-leg-confit-623411", fit: "cover", filename: "openverse50/duck-waterleaf-duck-leg-confit-623411.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "goose", local: true, group: "goose-at-yue-kee-roasted-goose-restaurant-301496", fit: "cover", filename: "openverse50/goose-at-yue-kee-roasted-goose-restaurant-301496.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-cold-plate-jellyfish-cucumber-jiaji-duck-and-roast-goose-575096", fit: "cover", filename: "openverse50/goose-cold-plate-jellyfish-cucumber-jiaji-duck-and-roast-goose-575096.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-frankonian-home-roasted-goose-with-dumpling-and-red-cabbage-218364", fit: "cover", filename: "openverse50/goose-frankonian-home-roasted-goose-with-dumpling-and-red-cabbage-218364.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-poultry-roast-fowls-roast-goose-roast-turkey-with-savoury-balls-roast--146300", fit: "contain", filename: "openverse50/goose-poultry-roast-fowls-roast-goose-roast-turkey-with-savoury-balls-roast--146300.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-117620", fit: "cover", filename: "openverse50/goose-roast-goose-117620.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-247881", fit: "cover", filename: "openverse50/goose-roast-goose-247881.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-628373", fit: "cover", filename: "openverse50/goose-roast-goose-628373.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-727420", fit: "cover", filename: "openverse50/goose-roast-goose-727420.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-759869", fit: "cover", filename: "openverse50/goose-roast-goose-759869.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-and-a-pint-of-murphys-52568", fit: "cover", filename: "openverse50/goose-roast-goose-and-a-pint-of-murphys-52568.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-for-christmas-364733", fit: "cover", filename: "openverse50/goose-roast-goose-for-christmas-364733.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-for-christmas-400296", fit: "cover", filename: "openverse50/goose-roast-goose-for-christmas-400296.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-for-christmas-420835", fit: "cover", filename: "openverse50/goose-roast-goose-for-christmas-420835.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-for-christmas-719682", fit: "cover", filename: "openverse50/goose-roast-goose-for-christmas-719682.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-husinek-prague-czech-republic-758228", fit: "cover", filename: "openverse50/goose-roast-goose-husinek-prague-czech-republic-758228.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-on-temple-st-672566", fit: "cover", filename: "openverse50/goose-roast-goose-on-temple-st-672566.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-over-noodles-930837", fit: "cover", filename: "openverse50/goose-roast-goose-over-noodles-930837.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roast-goose-t-y-h-hanoi-154756", fit: "cover", filename: "openverse50/goose-roast-goose-t-y-h-hanoi-154756.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roasted-goose-245220", fit: "contain", filename: "openverse50/goose-roasted-goose-245220.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roasted-goose-852566", fit: "cover", filename: "openverse50/goose-roasted-goose-852566.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-roasted-goose-full-388251", fit: "cover", filename: "openverse50/goose-roasted-goose-full-388251.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-the-roasted-goose-a-la-davidsen-s-tradition-yum-71538", fit: "cover", filename: "openverse50/goose-the-roasted-goose-a-la-davidsen-s-tradition-yum-71538.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-wei-kee-famous-hongkong-roast-goose-pudu-152501", fit: "cover", filename: "openverse50/goose-wei-kee-famous-hongkong-roast-goose-pudu-152501.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-wei-kee-famous-hongkong-roast-goose-pudu1-608144", fit: "cover", filename: "openverse50/goose-wei-kee-famous-hongkong-roast-goose-pudu1-608144.jpg", credit: "Openverse 本地鹅腿题库" },
-      { kind: "goose", local: true, group: "goose-yung-kee-roast-goose-972373", fit: "cover", filename: "openverse50/goose-yung-kee-roast-goose-972373.jpg", credit: "Openverse 本地鹅腿题库" }
+      { kind: "duck", local: true, group: "duck-01-duck-braised-duck-leg-with-lentils-753971", fit: "contain", filename: "final50/duck-01-duck-braised-duck-leg-with-lentils-753971.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-02-duck-braised-duck-leg-with-lentils-825900", fit: "contain", filename: "final50/duck-02-duck-braised-duck-leg-with-lentils-825900.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-03-duck-cassoulet-braised-white-bean-duck-leg-confit-garlic-sausage-pork-", fit: "contain", filename: "final50/duck-03-duck-cassoulet-braised-white-bean-duck-leg-confit-garlic-sausage-pork-.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-04-duck-cassoulet-of-duck-leg-lamb-sausage-house-bacon-and-cannelini-bean", fit: "contain", filename: "final50/duck-04-duck-cassoulet-of-duck-leg-lamb-sausage-house-bacon-and-cannelini-bean.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-05-duck-confit-duck-leg-guillaume-at-bennelong-163943", fit: "contain", filename: "final50/duck-05-duck-confit-duck-leg-guillaume-at-bennelong-163943.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-06-duck-confit-duck-leg-salad-491515", fit: "contain", filename: "final50/duck-06-duck-confit-duck-leg-salad-491515.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-07-duck-confit-duck-leg-with-braised-lentils-winter-greens-and-jus-gras-b", fit: "contain", filename: "final50/duck-07-duck-confit-duck-leg-with-braised-lentils-winter-greens-and-jus-gras-b.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-08-duck-confit-duck-leg-with-du-puy-lentils-bistro-vue-584300", fit: "contain", filename: "final50/duck-08-duck-confit-duck-leg-with-du-puy-lentils-bistro-vue-584300.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-09-duck-confit-foie-gras-and-duck-fat-fries-at-au-fil-des-saisons-109767", fit: "contain", filename: "final50/duck-09-duck-confit-foie-gras-and-duck-fat-fries-at-au-fil-des-saisons-109767.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-10-duck-crispy-duck-leg-confit-sonoma-valley-liberty-duck-warm-mushroom-s", fit: "contain", filename: "final50/duck-10-duck-crispy-duck-leg-confit-sonoma-valley-liberty-duck-warm-mushroom-s.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-11-duck-duck-961746", fit: "contain", filename: "final50/duck-11-duck-duck-961746.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-12-duck-duck-leg-178759", fit: "contain", filename: "final50/duck-12-duck-duck-leg-178759.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-13-duck-duck-leg-480578", fit: "contain", filename: "final50/duck-13-duck-duck-leg-480578.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-14-duck-duck-leg-confit-196116", fit: "contain", filename: "final50/duck-14-duck-duck-leg-confit-196116.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-15-duck-duck-leg-confit-with-kipfler-potato-salad-and-jus-gras-jones-the-", fit: "contain", filename: "final50/duck-15-duck-duck-leg-confit-with-kipfler-potato-salad-and-jus-gras-jones-the-.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-16-duck-duck-leg-noodles-at-hai-ky-mi-gia-337607", fit: "contain", filename: "final50/duck-16-duck-duck-leg-noodles-at-hai-ky-mi-gia-337607.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-17-duck-ginger-chili-duck-leg-crispy-sushi-rice-pickled-ginger-radish-gre", fit: "contain", filename: "final50/duck-17-duck-ginger-chili-duck-leg-crispy-sushi-rice-pickled-ginger-radish-gre.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-18-duck-noodles-with-stewed-duck-in-chinese-herbs-proud-peacock-aud9-5453", fit: "contain", filename: "final50/duck-18-duck-noodles-with-stewed-duck-in-chinese-herbs-proud-peacock-aud9-5453.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-19-duck-speck-confit-duck-leg-guillaume-at-bennelong-105405", fit: "contain", filename: "final50/duck-19-duck-speck-confit-duck-leg-guillaume-at-bennelong-105405.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-20-duck-confit-leg-of-duck-689432", fit: "contain", filename: "final50/duck-20-duck-confit-leg-of-duck-689432.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-21-duck-crisped-skin-and-drumstick-half-roast-duck-from-pacific-bbq-93006", fit: "contain", filename: "final50/duck-21-duck-crisped-skin-and-drumstick-half-roast-duck-from-pacific-bbq-93006.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-22-duck-dsc00047-877660", fit: "contain", filename: "final50/duck-22-duck-dsc00047-877660.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-24-duck-duck-confit-at-the-cobblestone-876044", fit: "contain", filename: "final50/duck-24-duck-duck-confit-at-the-cobblestone-876044.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-25-duck-duck-confit-leg-wolsey-creek-restaurant-revelstoke-bc-233198", fit: "contain", filename: "final50/duck-25-duck-duck-confit-leg-wolsey-creek-restaurant-revelstoke-bc-233198.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-26-duck-duck-leg-curry-with-morning-glory-greens-195626", fit: "contain", filename: "final50/duck-26-duck-duck-leg-curry-with-morning-glory-greens-195626.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-27-duck-duck-leg-french-style-tres-delicious-food-french-420016", fit: "contain", filename: "final50/duck-27-duck-duck-leg-french-style-tres-delicious-food-french-420016.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-28-duck-herbal-duck-drumstick-noodle-soup-claypot-king-glen-waverley-2594", fit: "contain", filename: "final50/duck-28-duck-herbal-duck-drumstick-noodle-soup-claypot-king-glen-waverley-2594.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-29-duck-roast-duck-drumstick-426076", fit: "contain", filename: "final50/duck-29-duck-roast-duck-drumstick-426076.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-30-duck-succulent-duck-leg-meat-at-hai-ky-mi-gia-413239", fit: "contain", filename: "final50/duck-30-duck-succulent-duck-leg-meat-at-hai-ky-mi-gia-413239.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-56-duck-cassoulet-au-confit-de-canard-jpg", fit: "contain", filename: "final50/duck-56-duck-cassoulet-au-confit-de-canard-jpg.jpg", credit: "精选本地鸭腿题库" },
+      { kind: "goose", local: true, group: "goose-35-goose-frankonian-home-roasted-goose-with-dumpling-and-red-cabbage-2183", fit: "contain", filename: "final50/goose-35-goose-frankonian-home-roasted-goose-with-dumpling-and-red-cabbage-2183.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-36-goose-roast-goose-117620", fit: "contain", filename: "final50/goose-36-goose-roast-goose-117620.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-37-goose-roast-goose-727420", fit: "contain", filename: "final50/goose-37-goose-roast-goose-727420.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-38-goose-roast-goose-759869", fit: "contain", filename: "final50/goose-38-goose-roast-goose-759869.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-39-goose-roast-goose-and-a-pint-of-murphys-52568", fit: "contain", filename: "final50/goose-39-goose-roast-goose-and-a-pint-of-murphys-52568.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-40-goose-roast-goose-for-christmas-364733", fit: "contain", filename: "final50/goose-40-goose-roast-goose-for-christmas-364733.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-41-goose-roast-goose-for-christmas-420835", fit: "contain", filename: "final50/goose-41-goose-roast-goose-for-christmas-420835.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-42-goose-roast-goose-husinek-prague-czech-republic-758228", fit: "contain", filename: "final50/goose-42-goose-roast-goose-husinek-prague-czech-republic-758228.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-43-goose-roast-goose-on-temple-st-672566", fit: "contain", filename: "final50/goose-43-goose-roast-goose-on-temple-st-672566.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-44-goose-roasted-goose-245220", fit: "contain", filename: "final50/goose-44-goose-roasted-goose-245220.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-45-goose-roasted-goose-852566", fit: "contain", filename: "final50/goose-45-goose-roasted-goose-852566.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-46-goose-roasted-goose-full-388251", fit: "contain", filename: "final50/goose-46-goose-roasted-goose-full-388251.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-47-goose-the-roasted-goose-a-la-davidsen-s-tradition-yum-71538", fit: "contain", filename: "final50/goose-47-goose-the-roasted-goose-a-la-davidsen-s-tradition-yum-71538.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-49-goose-yung-kee-roast-goose-972373", fit: "contain", filename: "final50/goose-49-goose-yung-kee-roast-goose-972373.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-50-goose-goose-stuffed-with-mashed-potato-605251", fit: "contain", filename: "final50/goose-50-goose-goose-stuffed-with-mashed-potato-605251.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-51-goose-martinigansl-5-929559", fit: "contain", filename: "final50/goose-51-goose-martinigansl-5-929559.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-52-goose-martinigansl-6-412936", fit: "contain", filename: "final50/goose-52-goose-martinigansl-6-412936.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-53-goose-plated-up-532886", fit: "contain", filename: "final50/goose-53-goose-plated-up-532886.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-55-goose-roast-goose-for-christmas-459399", fit: "contain", filename: "final50/goose-55-goose-roast-goose-for-christmas-459399.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-56-goose-smoked-goose-sage-and-onion-stuffing-roast-potatoes-goose-gravy-", fit: "contain", filename: "final50/goose-56-goose-smoked-goose-sage-and-onion-stuffing-roast-potatoes-goose-gravy-.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-58-goose-martinigansl-mit-rotkraut-und-serviettenkn-del-jpg", fit: "contain", filename: "final50/goose-58-goose-martinigansl-mit-rotkraut-und-serviettenkn-del-jpg.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-59-goose-cassoulet-mit-gans-und-bohnen-1-jpg", fit: "contain", filename: "final50/goose-59-goose-cassoulet-mit-gans-und-bohnen-1-jpg.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-60-goose-leg-of-goose-steckenroth-1-advent-jpg", fit: "contain", filename: "final50/goose-60-goose-leg-of-goose-steckenroth-1-advent-jpg.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-61-goose-20191110-hiataeinzug-023-49044577302-jpg", fit: "contain", filename: "final50/goose-61-goose-20191110-hiataeinzug-023-49044577302-jpg.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-62-goose-roast-goose-rice-jpg", fit: "contain", filename: "final50/goose-62-goose-roast-goose-rice-jpg.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-63-goose-cassoulet-mit-gans-und-bohnen-2-jpg", fit: "contain", filename: "final50/goose-63-goose-cassoulet-mit-gans-und-bohnen-2-jpg.jpg", credit: "精选本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-64-goose-christmas-goose-weihnachtsgans-jpg", fit: "contain", filename: "final50/goose-64-goose-christmas-goose-weihnachtsgans-jpg.jpg", credit: "精选本地鹅腿题库" }
     ];
 
     const hotlines = [
@@ -1228,9 +1235,12 @@
 
     function buildBalancedDeck() {
       const uniqueBank = uniqueByImage(bank);
-      const ducks = shuffle(uniqueBank.filter(item => item.kind === "duck")).slice(0, EACH_KIND);
-      const geese = shuffle(uniqueBank.filter(item => item.kind === "goose")).slice(0, EACH_KIND);
-      return shuffle([...ducks, ...geese]).slice(0, TOTAL);
+      const ducks = shuffle(uniqueBank.filter(item => item.kind === "duck"));
+      const geese = shuffle(uniqueBank.filter(item => item.kind === "goose"));
+      if (ducks.length < EACH_KIND || geese.length < EACH_KIND) {
+        throw new Error(`题库数量不足：鸭腿 ${ducks.length} 张，鹅腿 ${geese.length} 张，本局各需要 ${EACH_KIND} 张。`);
+      }
+      return shuffle([...ducks.slice(0, EACH_KIND), ...geese.slice(0, EACH_KIND)]);
     }
 
     async function prepareDeckImages() {
@@ -1243,18 +1253,22 @@
       const missing = deck.filter(item => preloadedImages.get(imageUrl(item))?.status !== "loaded");
       if (missing.length) {
         const used = new Set(deck.map(item => item.group || item.filename));
-        const replacements = shuffle(uniqueByImage(bank)).filter(item => {
-          const key = item.group || item.filename;
-          return !used.has(key) && !missing.includes(item);
-        });
         for (const bad of missing) {
           const idx = deck.indexOf(bad);
-          const next = replacements.shift();
+          const next = shuffle(uniqueByImage(bank)).find(item => {
+            const key = item.group || item.filename;
+            return item.kind === bad.kind && !used.has(key) && preloadedImages.get(imageUrl(item))?.status !== "bad";
+          });
           if (next) {
             deck[idx] = next;
+            used.add(next.group || next.filename);
             await preloadItem(next);
           }
         }
+      }
+      deck = deck.filter(item => preloadedImages.get(imageUrl(item))?.status === "loaded");
+      if (deck.length < TOTAL) {
+        console.error("本局可用图片不足 20 张，当前可用：", deck.length);
       }
       els.duckBtn.disabled = false;
       els.gooseBtn.disabled = false;
@@ -1406,7 +1420,10 @@
       if (deck[index] !== item || locked) return;
       deck.splice(index, 1);
       const used = new Set(deck.map(entry => entry.group || `${entry.local ? "local" : "remote"}:${entry.filename}`));
-      const replacement = shuffle(uniqueByImage(bank)).find(entry => !used.has(entry.group || `${entry.local ? "local" : "remote"}:${entry.filename}`));
+      const replacement = shuffle(uniqueByImage(bank)).find(entry => {
+        const key = entry.group || `${entry.local ? "local" : "remote"}:${entry.filename}`;
+        return entry.kind === item.kind && !used.has(key) && preloadedImages.get(imageUrl(entry))?.status !== "bad";
+      });
       if (replacement) deck.splice(index, 0, replacement);
       renderQuestion();
     }
