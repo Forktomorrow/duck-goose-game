@@ -1,0 +1,1499 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>闯关：鸭腿还是鹅腿？</title>
+  <style>
+    :root {
+      --ink: #211914;
+      --muted: #756b61;
+      --paper: #f7efe2;
+      --panel: #fff9ef;
+      --line: #ded0bc;
+      --duck: #b7422a;
+      --goose: #276457;
+      --gold: #d39b36;
+      --veg: #79a74c;
+      --hat: #d24b2f;
+      --shadow: 0 20px 52px rgba(55, 38, 20, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(211, 155, 54, 0.16), transparent 26%),
+        linear-gradient(145deg, #f2e1c8 0%, #fbf4e9 45%, #e9d6ba 100%);
+      font-family: "Songti SC", "Noto Serif SC", Georgia, serif;
+      letter-spacing: 0;
+    }
+
+    button {
+      font: inherit;
+      border: 0;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .app {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: 22px;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(270px, 360px) minmax(0, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .side {
+      min-height: calc(100vh - 44px);
+      padding: 24px;
+      border: 1px solid rgba(93, 65, 34, 0.18);
+      background: rgba(255, 249, 239, 0.78);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 12px;
+    }
+
+    .kicker {
+      margin: 0;
+      color: var(--duck);
+      font: 700 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 0.95;
+      text-wrap: pretty;
+    }
+
+    .lede {
+      margin: 0;
+      color: var(--muted);
+      font: 15px/1.7 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .meme-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .meme-strip span {
+      padding: 7px 10px;
+      border: 1px solid rgba(93, 65, 34, 0.22);
+      background: rgba(255, 255, 255, 0.42);
+      color: #5f3a20;
+      font: 800 12px/1 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .aunt-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: #fff5e5;
+      display: grid;
+      grid-template-columns: 104px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .aunt {
+      width: 104px;
+      height: 124px;
+      border-radius: 34px 34px 38px 38px;
+      background:
+        radial-gradient(ellipse at 36px 58px, #20120c 0 7px, transparent 8px),
+        radial-gradient(ellipse at 68px 58px, #20120c 0 7px, transparent 8px),
+        radial-gradient(ellipse at 52px 76px, #a63b2b 0 12px, transparent 13px),
+        radial-gradient(ellipse at 52px 52px, #f3c08e 0 35px, transparent 36px),
+        linear-gradient(180deg, transparent 0 70px, var(--hat) 71px 124px);
+      border: 3px solid #40251a;
+      position: relative;
+      overflow: visible;
+      box-shadow: inset 0 -10px 0 rgba(123, 64, 34, 0.12), 0 10px 20px rgba(80, 42, 20, 0.16);
+    }
+
+    .aunt::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: -15px;
+      width: 88px;
+      height: 45px;
+      border-radius: 42px 42px 18px 18px;
+      border: 3px solid #40251a;
+      background:
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.16) 0 5px, transparent 5px 13px),
+        linear-gradient(180deg, #e25d3c, #b93624);
+      box-shadow: inset 0 -9px 0 rgba(91, 32, 18, 0.18);
+      z-index: 2;
+    }
+
+    .aunt::after {
+      content: "鹅";
+      position: absolute;
+      right: 12px;
+      bottom: 16px;
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #fff7ea;
+      border: 2px solid rgba(64, 37, 26, 0.74);
+      color: #7e3b23;
+      font: 900 13px/1 serif;
+    }
+
+    .eye {
+      display: none;
+    }
+
+    .eye.left { left: 27px; }
+    .eye.right { right: 27px; }
+
+    .mouth {
+      position: absolute;
+      left: 50%;
+      top: 68px;
+      width: 32px;
+      height: 16px;
+      transform: translateX(-50%);
+      border: 3px solid #20120c;
+      border-top: 0;
+      border-radius: 0 0 28px 28px;
+      transition: 220ms ease;
+    }
+
+    .aunt.sad .mouth {
+      top: 73px;
+      border: 3px solid #20120c;
+      border-bottom: 0;
+      border-radius: 28px 28px 0 0;
+    }
+
+    .aunt.sad {
+      background:
+        radial-gradient(ellipse at 36px 58px, #20120c 0 5px, transparent 6px),
+        radial-gradient(ellipse at 68px 58px, #20120c 0 5px, transparent 6px),
+        linear-gradient(180deg, transparent 0 62px, rgba(87, 170, 210, 0.75) 63px 76px, transparent 77px),
+        radial-gradient(ellipse at 52px 52px, #f3c08e 0 35px, transparent 36px),
+        linear-gradient(180deg, transparent 0 70px, var(--hat) 71px 124px);
+    }
+
+    .aunt.nervous .mouth {
+      top: 73px;
+      width: 26px;
+      height: 4px;
+      border: 0;
+      background: #20120c;
+      border-radius: 99px;
+    }
+
+    .aunt.nervous {
+      background:
+        radial-gradient(ellipse at 36px 58px, #20120c 0 5px, transparent 6px),
+        radial-gradient(ellipse at 68px 58px, #20120c 0 5px, transparent 6px),
+        linear-gradient(90deg, transparent 0 27px, rgba(255, 255, 255, 0.92) 28px 32px, transparent 33px 60px, rgba(255, 255, 255, 0.92) 61px 65px, transparent 66px),
+        radial-gradient(ellipse at 52px 52px, #f3c08e 0 35px, transparent 36px),
+        linear-gradient(180deg, transparent 0 70px, var(--hat) 71px 124px);
+    }
+
+    .aunt.broken .mouth {
+      top: 75px;
+      width: 30px;
+      height: 21px;
+      border: 3px solid #20120c;
+      border-bottom: 0;
+      border-radius: 28px 28px 0 0;
+    }
+
+    .aunt.broken {
+      transform: rotate(-2deg);
+      background:
+        linear-gradient(45deg, transparent 0 30px, rgba(87, 170, 210, 0.9) 31px 36px, transparent 37px),
+        linear-gradient(-45deg, transparent 0 54px, rgba(87, 170, 210, 0.9) 55px 60px, transparent 61px),
+        radial-gradient(ellipse at 36px 58px, #20120c 0 4px, transparent 5px),
+        radial-gradient(ellipse at 68px 58px, #20120c 0 4px, transparent 5px),
+        radial-gradient(ellipse at 52px 52px, #f3c08e 0 35px, transparent 36px),
+        linear-gradient(180deg, transparent 0 70px, var(--hat) 71px 124px);
+    }
+
+    .aunt-copy {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .aunt-copy strong {
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .aunt-copy span {
+      color: var(--muted);
+      font: 13px/1.55 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .hotline {
+      position: relative;
+      padding: 15px 16px;
+      border: 1px solid rgba(93, 65, 34, 0.2);
+      background: #1f2b25;
+      color: #eaffd5;
+      overflow: hidden;
+    }
+
+    .hotline::before {
+      content: "群公告";
+      position: absolute;
+      right: 11px;
+      top: 9px;
+      color: rgba(234, 255, 213, 0.28);
+      font: 900 28px/1 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .hotline b {
+      display: block;
+      position: relative;
+      font: 900 18px/1.25 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .hotline span {
+      display: block;
+      position: relative;
+      margin-top: 7px;
+      color: rgba(234, 255, 213, 0.76);
+      font: 13px/1.55 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .score-board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .metric {
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.46);
+    }
+
+    .metric b {
+      display: block;
+      font: 700 24px/1.1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      margin-top: 5px;
+      font: 12px/1.2 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .stage {
+      min-height: calc(100vh - 44px);
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      gap: 14px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border: 1px solid rgba(93, 65, 34, 0.18);
+      background: rgba(255, 249, 239, 0.78);
+      box-shadow: 0 12px 32px rgba(55, 38, 20, 0.12);
+    }
+
+    .progress {
+      flex: 1;
+      height: 9px;
+      background: rgba(117, 107, 97, 0.18);
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--duck), var(--gold), var(--goose));
+      transition: width 260ms ease;
+    }
+
+    .round {
+      color: var(--muted);
+      font: 700 13px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+      white-space: nowrap;
+    }
+
+    .card-wrap {
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      perspective: 1200px;
+    }
+
+    .question-card {
+      width: min(100%, 650px);
+      height: min(78vh, 780px);
+      min-height: 570px;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+      background: var(--panel);
+      border: 1px solid rgba(93, 65, 34, 0.2);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      touch-action: pan-y;
+      user-select: none;
+      transform: translateX(var(--drag-x, 0px)) rotate(var(--drag-r, 0deg));
+      transition: transform 220ms ease, opacity 220ms ease;
+    }
+
+    .photo-area {
+      position: relative;
+      min-height: 0;
+      background:
+        linear-gradient(135deg, rgba(255, 249, 239, 0.08) 25%, transparent 25%) 0 0 / 26px 26px,
+        linear-gradient(135deg, transparent 75%, rgba(255, 249, 239, 0.08) 75%) 0 0 / 26px 26px,
+        #251914;
+      overflow: hidden;
+    }
+
+    .photo-area img {
+      width: 100%;
+      height: 100%;
+      object-fit: var(--image-fit, cover);
+      display: block;
+      filter: saturate(1.03) contrast(1.02);
+      opacity: 1;
+      transition: opacity 160ms ease;
+    }
+
+    .photo-area.loading img {
+      opacity: 0.18;
+    }
+
+    .photo-area.fit-contain {
+      background:
+        linear-gradient(135deg, rgba(255, 249, 239, 0.12) 25%, transparent 25%) 0 0 / 26px 26px,
+        linear-gradient(135deg, transparent 75%, rgba(255, 249, 239, 0.12) 75%) 0 0 / 26px 26px,
+        #211711;
+      --image-fit: contain;
+    }
+
+    .photo-area.loading .loading-note {
+      opacity: 1;
+    }
+
+    .loading-note {
+      position: absolute;
+      inset: auto 18px 18px;
+      z-index: 2;
+      padding: 10px 12px;
+      background: rgba(255, 247, 234, 0.92);
+      color: #3a2418;
+      opacity: 0;
+      pointer-events: none;
+      font: 900 13px/1.35 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      transition: opacity 160ms ease;
+    }
+
+    .photo-area::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(var(--stamp-scale, 0.8));
+      opacity: var(--stamp-opacity, 0);
+      padding: 14px 24px;
+      border: 4px solid rgba(255, 255, 255, 0.95);
+      background: rgba(28, 16, 12, 0.44);
+      color: #fff7ea;
+      font: 900 34px/1 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(10px);
+      pointer-events: none;
+      transition: opacity 160ms ease, transform 160ms ease;
+      z-index: 3;
+      white-space: nowrap;
+    }
+
+    .photo-area::before {
+      content: attr(data-sub);
+      position: absolute;
+      left: 50%;
+      top: calc(50% + 56px);
+      transform: translateX(-50%) scale(var(--stamp-scale, 0.8));
+      opacity: var(--stamp-opacity, 0);
+      padding: 6px 14px;
+      background: rgba(255, 247, 234, 0.92);
+      color: #3a2418;
+      font: 800 13px/1 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      letter-spacing: 0.08em;
+      pointer-events: none;
+      transition: opacity 160ms ease, transform 160ms ease;
+      z-index: 3;
+      white-space: nowrap;
+    }
+
+    .photo-area.judged {
+      --stamp-opacity: 1;
+      --stamp-scale: 1;
+    }
+
+    .photo-area.stamp-good::after {
+      border-color: rgba(255, 233, 223, 0.96);
+      background: rgba(183, 66, 42, 0.58);
+    }
+
+    .photo-area.stamp-bad::after {
+      border-color: rgba(226, 255, 246, 0.96);
+      background: rgba(39, 100, 87, 0.58);
+    }
+
+    .photo-area.stamp-green::after {
+      border-color: rgba(242, 255, 223, 0.96);
+      background: rgba(121, 167, 76, 0.64);
+    }
+
+    .verdict-badge {
+      position: absolute;
+      top: 18px;
+      padding: 10px 16px;
+      border: 3px solid currentColor;
+      color: #fff;
+      background: rgba(35, 21, 12, 0.42);
+      backdrop-filter: blur(10px);
+      font: 900 24px/1 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      transform: rotate(-8deg);
+      opacity: 0;
+      transition: opacity 120ms ease;
+    }
+
+    .verdict-badge.duck { left: 18px; color: #ffcfbf; }
+    .verdict-badge.goose { right: 18px; color: #bdf0df; transform: rotate(8deg); }
+
+    .drag-duck .verdict-badge.duck,
+    .drag-goose .verdict-badge.goose { opacity: 1; }
+
+    .caption {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      padding: 18px 20px;
+      align-items: center;
+    }
+
+    .caption h2 {
+      margin: 0;
+      font-size: 23px;
+      line-height: 1.2;
+    }
+
+    .caption p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font: 13px/1.5 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .hint {
+      color: var(--muted);
+      font: 12px/1.45 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      text-align: right;
+      max-width: 180px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .status-line {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .status-pill {
+      min-height: 52px;
+      padding: 10px 14px;
+      border: 1px solid rgba(93, 65, 34, 0.2);
+      background: rgba(255, 249, 239, 0.78);
+      font: 800 13px/1.35 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .status-pill b {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .choice {
+      min-height: 64px;
+      color: #fffdf7;
+      padding: 0 18px;
+      font: 900 20px/1 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      box-shadow: 0 12px 28px rgba(55, 38, 20, 0.18);
+      transition: transform 160ms ease, filter 160ms ease;
+    }
+
+    .choice:hover { transform: translateY(-2px); filter: brightness(1.04); }
+    .choice:active { transform: translateY(1px); }
+    .choice.duck { background: var(--duck); }
+    .choice.goose { background: var(--goose); }
+
+    .feedback {
+      min-height: 74px;
+      margin-top: 12px;
+      color: #2a1a13;
+      padding: 16px 18px;
+      border: 2px solid rgba(93, 65, 34, 0.28);
+      background: rgba(255, 249, 239, 0.9);
+      font: 900 clamp(19px, 2.2vw, 28px)/1.28 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      box-shadow: 0 12px 28px rgba(55, 38, 20, 0.12);
+    }
+
+    .feedback small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font: 700 13px/1.35 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(37, 25, 20, 0.52);
+      z-index: 10;
+    }
+
+    .overlay.show { display: grid; }
+
+    .result {
+      width: min(720px, 100%);
+      padding: 28px;
+      background: #fff7ea;
+      border: 1px solid #5b3928;
+      box-shadow: 0 30px 80px rgba(20, 12, 6, 0.35);
+      display: grid;
+      gap: 18px;
+    }
+
+    .final-aunt-card {
+      grid-template-columns: 148px 1fr;
+    }
+
+    .final-aunt-card .aunt {
+      width: 148px;
+      height: 176px;
+      border-radius: 48px 48px 54px 54px;
+      background:
+        radial-gradient(circle at 51px 82px, #20120c 0 6px, transparent 7px),
+        radial-gradient(circle at 94px 82px, #20120c 0 6px, transparent 7px),
+        radial-gradient(ellipse at 73px 108px, transparent 0 20px, #20120c 21px 24px, transparent 25px),
+        radial-gradient(ellipse at 73px 76px, #f3c08e 0 50px, transparent 51px),
+        linear-gradient(180deg, transparent 0 99px, var(--hat) 100px 176px);
+    }
+
+    .final-aunt-card .aunt::before {
+      left: 12px;
+      top: -22px;
+      width: 124px;
+      height: 64px;
+      border-radius: 58px 58px 24px 24px;
+    }
+
+    .final-aunt-card .aunt::after {
+      right: 19px;
+      bottom: 25px;
+      width: 32px;
+      height: 32px;
+      font-size: 17px;
+    }
+
+    .final-aunt-card .mouth {
+      top: 104px;
+      width: 46px;
+      height: 22px;
+    }
+
+    .final-aunt-card .aunt.sad .mouth,
+    .final-aunt-card .aunt.nervous .mouth {
+      top: 113px;
+    }
+
+    .meme-theater {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .story-card {
+      padding: 15px 16px;
+      border: 1px solid var(--line);
+      background: #2a1d16;
+      color: #fff7ea;
+      font: 800 17px/1.75 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .story-card b {
+      display: block;
+      margin-bottom: 6px;
+      color: #ffd07c;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+    }
+
+    .chat-bubble, .recipe-card {
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.55);
+      font: 700 14px/1.55 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .chat-bubble b, .recipe-card b {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--duck);
+      font-size: 13px;
+    }
+
+    .chat-line {
+      display: block;
+      width: fit-content;
+      max-width: 92%;
+      margin: 3px 0;
+      padding: 7px 10px;
+      background: #fff;
+      border: 1px solid rgba(93, 65, 34, 0.16);
+    }
+
+    .chat-line.green {
+      background: #9bed63;
+      color: #172011;
+      margin-left: auto;
+    }
+
+    .recipe-card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .result h2 {
+      margin: 0;
+      font-size: clamp(28px, 7vw, 48px);
+      line-height: 0.98;
+    }
+
+    .result p {
+      margin: 0;
+      color: var(--muted);
+      font: 15px/1.8 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .plain-btn {
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      font: 700 14px/1 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .primary-btn {
+      min-height: 44px;
+      padding: 0 18px;
+      background: var(--ink);
+      color: #fff9ef;
+      font: 800 14px/1 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .source-list {
+      display: none;
+      margin-top: 8px;
+      max-height: 180px;
+      overflow: auto;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid var(--line);
+      font: 12px/1.55 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    }
+
+    .source-list.show { display: block; }
+    .source-list a { color: #68431f; }
+
+    @media (max-width: 820px) {
+      .app {
+        padding: 12px;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .stage { order: 1; }
+      .side { order: 2; }
+
+      .side {
+        min-height: auto;
+        padding: 16px;
+        gap: 14px;
+      }
+
+      .brand { gap: 8px; }
+      .lede { display: none; }
+      .meme-strip { gap: 6px; }
+      .meme-strip span { padding: 6px 8px; font-size: 11px; }
+      .aunt-card { grid-template-columns: 84px 1fr; padding: 12px; }
+      .aunt { width: 84px; height: 100px; border-radius: 28px 28px 32px 32px; }
+      .aunt::before { left: 6px; top: -13px; width: 72px; height: 38px; }
+      .aunt::after { right: 9px; bottom: 12px; width: 20px; height: 20px; font-size: 11px; }
+      .eye { top: 33px; width: 7px; height: 7px; }
+      .eye.left { left: 22px; }
+      .eye.right { right: 22px; }
+      .mouth { top: 55px; width: 26px; height: 13px; }
+      .aunt.sad .mouth { top: 60px; }
+      .aunt.nervous .mouth { top: 60px; width: 22px; }
+      .aunt.broken .mouth { top: 62px; width: 24px; height: 16px; }
+      .hotline { padding: 12px; }
+      .hotline b { font-size: 16px; }
+      .score-board { grid-template-columns: repeat(3, 1fr); }
+      .metric { padding: 9px; }
+      .stage { min-height: auto; }
+      .topbar { padding: 10px 12px; }
+      .question-card {
+        width: 100%;
+        height: min(74vh, 690px);
+        min-height: 510px;
+      }
+      .caption {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        padding: 14px;
+      }
+      .caption h2 { font-size: 20px; }
+      .hint { text-align: left; max-width: none; }
+      .choice { min-height: 58px; font-size: 18px; }
+      .feedback { min-height: 64px; font-size: 19px; padding: 14px; }
+      .status-line { grid-template-columns: 1fr; }
+      .result { padding: 16px; max-height: calc(100vh - 24px); overflow: auto; }
+      .final-aunt-card { grid-template-columns: 96px 1fr; }
+      .final-aunt-card .aunt { width: 96px; height: 116px; }
+      .final-aunt-card .aunt::before { width: 82px; height: 42px; top: -15px; left: 7px; }
+      .final-aunt-card .mouth { top: 64px; }
+      .final-aunt-card .aunt.sad .mouth,
+      .final-aunt-card .aunt.nervous .mouth { top: 70px; }
+      .meme-theater { grid-template-columns: 1fr; }
+      .story-card { font-size: 15px; line-height: 1.65; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <aside class="side">
+      <section class="brand">
+        <p class="kicker">Twenty bites challenge</p>
+        <h1>鸭腿，还是鹅腿？</h1>
+        <p class="lede">清北传说进入鉴腿时代。20 张图，随机出题，电脑点按钮，手机左右滑。左滑判鸭腿，右滑判鹅腿。</p>
+        <div class="meme-strip" aria-label="热搜梗元素">
+          <span>绿色鸭腿</span>
+          <span>葱叶秘方</span>
+          <span>群公告体</span>
+          <span>同学别急</span>
+        </div>
+      </section>
+
+      <section class="aunt-card" aria-live="polite">
+        <div id="auntFace" class="aunt">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="mouth"></span>
+        </div>
+        <div class="aunt-copy">
+          <strong id="auntTitle">阿姨正在观察你</strong>
+          <span id="auntLine">别急，先看肉纹、骨形、皮脂和大小。你以为你分得清，其实第一题就会动摇。</span>
+        </div>
+      </section>
+
+      <section class="hotline">
+        <b id="hotlineTitle">热搜播报：今天也是鉴腿局</b>
+        <span id="hotlineLine">群里说原材料是鸭腿，摊前说这是鹅腿，真正的答案藏在骨头和皮脂里。</span>
+      </section>
+
+      <section class="score-board">
+        <div class="metric"><b id="score">0</b><span>得分</span></div>
+        <div class="metric"><b id="streak">0</b><span>连对</span></div>
+        <div class="metric"><b id="leftCount">20</b><span>剩余</span></div>
+      </section>
+    </aside>
+
+    <section class="stage">
+      <div class="topbar">
+        <div class="progress"><span id="progressBar"></span></div>
+        <div class="round" id="roundText">01 / 20</div>
+      </div>
+
+      <div class="card-wrap">
+        <article id="card" class="question-card">
+          <div class="photo-area" id="photoArea" data-label="" data-sub="">
+            <img id="photo" alt="待判断的烤腿图片" draggable="false" />
+            <div class="loading-note">图片加载中，阿姨正在翻烤盘...</div>
+            <div class="verdict-badge duck">鸭腿</div>
+            <div class="verdict-badge goose">鹅腿</div>
+          </div>
+          <div class="caption">
+            <div>
+              <h2 id="questionTitle">这一口，到底是什么腿？</h2>
+              <p id="questionMeta">题库加载中</p>
+            </div>
+            <div class="hint">手机：左滑鸭腿，右滑鹅腿<br />电脑：点下方按钮</div>
+          </div>
+        </article>
+      </div>
+
+      <div>
+        <div class="actions">
+          <button class="choice duck" id="duckBtn" type="button">左滑 / 鸭腿</button>
+          <button class="choice goose" id="gooseBtn" type="button">右滑 / 鹅腿</button>
+        </div>
+        <div class="status-line" aria-live="polite">
+          <div class="status-pill"><b>同学发问</b><span id="chatPrompt">这题看着不简单，先别急着下单。</span></div>
+          <div class="status-pill"><b>阿姨回复</b><span id="chatReply">放心，先看骨节，再看皮脂。</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="overlay" class="overlay" role="dialog" aria-modal="true">
+    <section class="result">
+      <div class="aunt-card final-aunt-card">
+        <div id="finalFace" class="aunt">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="mouth"></span>
+        </div>
+        <div class="aunt-copy">
+          <strong id="finalRank">鉴腿结算中</strong>
+          <span id="finalOneLine">请稍候</span>
+        </div>
+      </div>
+      <h2 id="finalScore">0 / 20</h2>
+      <p id="finalCopy"></p>
+      <div class="story-card">
+        <b>结算小故事</b>
+        <span id="finalStory">正在生成摊位传说。</span>
+      </div>
+      <div class="meme-theater">
+        <div class="chat-bubble">
+          <b>微信对话小剧场</b>
+          <div id="finalChatLog">
+            <span class="chat-line">你好同学，这个怎么有点绿？</span>
+            <span class="chat-line green">绿色是葱叶榨汁，放心吃。</span>
+          </div>
+        </div>
+        <div class="recipe-card">
+          <b>今日摊位配方表</b>
+          <ul id="recipeList">
+            <li>白糖色负责上色</li>
+            <li>葱叶汁负责悬疑</li>
+            <li>同学们负责热搜</li>
+          </ul>
+        </div>
+      </div>
+      <div class="result-actions">
+        <button class="primary-btn" id="restartBtn" type="button">再来 20 题</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const commons = filename => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(filename)}?width=1400`;
+    const localAsset = filename => `duck-goose-assets/${filename}`;
+    const imageUrl = item => item.local ? localAsset(item.filename) : commons(item.filename);
+
+    const bank = [
+      { kind: "duck", local: true, group: "duck-braised-duck-leg-with-lentils-753971", fit: "cover", filename: "openverse50/duck-braised-duck-leg-with-lentils-753971.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-braised-duck-leg-with-lentils-825900", fit: "cover", filename: "openverse50/duck-braised-duck-leg-with-lentils-825900.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-cassoulet-braised-white-bean-duck-leg-confit-garlic-sausage-pork-belly-508355", fit: "cover", filename: "openverse50/duck-cassoulet-braised-white-bean-duck-leg-confit-garlic-sausage-pork-belly-508355.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-cassoulet-of-duck-leg-lamb-sausage-house-bacon-and-cannelini-beans-785709", fit: "cover", filename: "openverse50/duck-cassoulet-of-duck-leg-lamb-sausage-house-bacon-and-cannelini-beans-785709.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-confit-duck-leg-guillaume-at-bennelong-163943", fit: "cover", filename: "openverse50/duck-confit-duck-leg-guillaume-at-bennelong-163943.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-confit-duck-leg-guillaume-at-bennelong-880691", fit: "cover", filename: "openverse50/duck-confit-duck-leg-guillaume-at-bennelong-880691.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-confit-duck-leg-guillaume-at-bennelong-by-julia-322132", fit: "cover", filename: "openverse50/duck-confit-duck-leg-guillaume-at-bennelong-by-julia-322132.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-confit-duck-leg-guillaume-at-bennelong-by-julia-54719", fit: "cover", filename: "openverse50/duck-confit-duck-leg-guillaume-at-bennelong-by-julia-54719.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-confit-duck-leg-salad-491515", fit: "cover", filename: "openverse50/duck-confit-duck-leg-salad-491515.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-confit-duck-leg-with-du-puy-lentils-bistro-vue-584300", fit: "cover", filename: "openverse50/duck-confit-duck-leg-with-du-puy-lentils-bistro-vue-584300.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-confit-foie-gras-and-duck-fat-fries-at-au-fil-des-saisons-109767", fit: "cover", filename: "openverse50/duck-confit-foie-gras-and-duck-fat-fries-at-au-fil-des-saisons-109767.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-crispy-duck-leg-confit-sonoma-valley-liberty-duck-warm-mushroom-salad--499671", fit: "cover", filename: "openverse50/duck-crispy-duck-leg-confit-sonoma-valley-liberty-duck-warm-mushroom-salad--499671.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-duck-leg-178759", fit: "cover", filename: "openverse50/duck-duck-leg-178759.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-duck-leg-480578", fit: "cover", filename: "openverse50/duck-duck-leg-480578.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-duck-leg-confit-196116", fit: "cover", filename: "openverse50/duck-duck-leg-confit-196116.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-duck-leg-confit-with-kipfler-potato-salad-and-jus-gras-jones-the-groce-22568", fit: "cover", filename: "openverse50/duck-duck-leg-confit-with-kipfler-potato-salad-and-jus-gras-jones-the-groce-22568.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-duck-leg-confit-with-kipfler-potato-salad-and-jus-gras-jones-the-groce-763465", fit: "cover", filename: "openverse50/duck-duck-leg-confit-with-kipfler-potato-salad-and-jus-gras-jones-the-groce-763465.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-duck-leg-noodles-at-hai-ky-mi-gia-337607", fit: "cover", filename: "openverse50/duck-duck-leg-noodles-at-hai-ky-mi-gia-337607.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-duck-san-choi-bow-103643", fit: "cover", filename: "openverse50/duck-duck-san-choi-bow-103643.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-ginger-chili-duck-leg-crispy-sushi-rice-pickled-ginger-radish-greens-283657", fit: "cover", filename: "openverse50/duck-ginger-chili-duck-leg-crispy-sushi-rice-pickled-ginger-radish-greens-283657.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-noodles-with-stewed-duck-in-chinese-herbs-proud-peacock-aud9-545326", fit: "cover", filename: "openverse50/duck-noodles-with-stewed-duck-in-chinese-herbs-proud-peacock-aud9-545326.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-smoked-duck-leg-at-t-t-296762", fit: "cover", filename: "openverse50/duck-smoked-duck-leg-at-t-t-296762.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-speck-confit-duck-leg-guillaume-at-bennelong-105405", fit: "cover", filename: "openverse50/duck-speck-confit-duck-leg-guillaume-at-bennelong-105405.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-speck-confit-duck-leg-guillaume-at-bennelong-7912", fit: "cover", filename: "openverse50/duck-speck-confit-duck-leg-guillaume-at-bennelong-7912.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-waterleaf-duck-leg-confit-623411", fit: "cover", filename: "openverse50/duck-waterleaf-duck-leg-confit-623411.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "goose", local: true, group: "goose-at-yue-kee-roasted-goose-restaurant-301496", fit: "cover", filename: "openverse50/goose-at-yue-kee-roasted-goose-restaurant-301496.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-cold-plate-jellyfish-cucumber-jiaji-duck-and-roast-goose-575096", fit: "cover", filename: "openverse50/goose-cold-plate-jellyfish-cucumber-jiaji-duck-and-roast-goose-575096.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-frankonian-home-roasted-goose-with-dumpling-and-red-cabbage-218364", fit: "cover", filename: "openverse50/goose-frankonian-home-roasted-goose-with-dumpling-and-red-cabbage-218364.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-poultry-roast-fowls-roast-goose-roast-turkey-with-savoury-balls-roast--146300", fit: "contain", filename: "openverse50/goose-poultry-roast-fowls-roast-goose-roast-turkey-with-savoury-balls-roast--146300.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-117620", fit: "cover", filename: "openverse50/goose-roast-goose-117620.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-247881", fit: "cover", filename: "openverse50/goose-roast-goose-247881.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-628373", fit: "cover", filename: "openverse50/goose-roast-goose-628373.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-727420", fit: "cover", filename: "openverse50/goose-roast-goose-727420.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-759869", fit: "cover", filename: "openverse50/goose-roast-goose-759869.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-and-a-pint-of-murphys-52568", fit: "cover", filename: "openverse50/goose-roast-goose-and-a-pint-of-murphys-52568.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-for-christmas-364733", fit: "cover", filename: "openverse50/goose-roast-goose-for-christmas-364733.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-for-christmas-400296", fit: "cover", filename: "openverse50/goose-roast-goose-for-christmas-400296.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-for-christmas-420835", fit: "cover", filename: "openverse50/goose-roast-goose-for-christmas-420835.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-for-christmas-719682", fit: "cover", filename: "openverse50/goose-roast-goose-for-christmas-719682.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-husinek-prague-czech-republic-758228", fit: "cover", filename: "openverse50/goose-roast-goose-husinek-prague-czech-republic-758228.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-on-temple-st-672566", fit: "cover", filename: "openverse50/goose-roast-goose-on-temple-st-672566.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-over-noodles-930837", fit: "cover", filename: "openverse50/goose-roast-goose-over-noodles-930837.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roast-goose-t-y-h-hanoi-154756", fit: "cover", filename: "openverse50/goose-roast-goose-t-y-h-hanoi-154756.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roasted-goose-245220", fit: "contain", filename: "openverse50/goose-roasted-goose-245220.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roasted-goose-852566", fit: "cover", filename: "openverse50/goose-roasted-goose-852566.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-roasted-goose-full-388251", fit: "cover", filename: "openverse50/goose-roasted-goose-full-388251.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-the-roasted-goose-a-la-davidsen-s-tradition-yum-71538", fit: "cover", filename: "openverse50/goose-the-roasted-goose-a-la-davidsen-s-tradition-yum-71538.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-wei-kee-famous-hongkong-roast-goose-pudu-152501", fit: "cover", filename: "openverse50/goose-wei-kee-famous-hongkong-roast-goose-pudu-152501.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-wei-kee-famous-hongkong-roast-goose-pudu1-608144", fit: "cover", filename: "openverse50/goose-wei-kee-famous-hongkong-roast-goose-pudu1-608144.jpg", credit: "Openverse 本地鹅腿题库" },
+      { kind: "goose", local: true, group: "goose-yung-kee-roast-goose-972373", fit: "cover", filename: "openverse50/goose-yung-kee-roast-goose-972373.jpg", credit: "Openverse 本地鹅腿题库" }
+    ];
+
+    const hotlines = [
+      ["群公告体启动", "大家好，原材料写清楚了，但真正的考验是你能不能从图片里看出来。"],
+      ["同学别急", "绿色不一定是魔法，也可能是葱叶汁、蔬菜汁和热搜一起发力。"],
+      ["摊位经济学", "鸭腿价格低，鹅腿滤镜高，分辨力就是你的饭卡护盾。"],
+      ["李莹厅传说", "今天不排队，今天直接考试：看腿识物，错一题就少一分清醒。"],
+      ["白糖色警报", "颜色好看不等于物种升级，焦糖感可能只是白糖色的温柔滤镜。"]
+    ];
+
+    const correctMemes = [
+      ["这题你怎么一眼看出来的？", "同学你是真懂，已经绕开「鹅腿滤镜」了。"],
+      ["这个骨节是不是暴露了？", "对，骨头一露，答案就开始说实话。"],
+      ["我刚才差点被焦皮骗了。", "还好你稳住了，饭卡安全等级 +1。"],
+      ["绿色会不会影响判断？", "不会，今天的葱叶汁没有干扰你的判断。"],
+      ["这题能不能进质检群？", "可以，临时质检员工牌给你挂上了。"],
+      ["是不是看大小就行？", "大小只是诱饵，皮脂和骨形才是证词。"],
+      ["我感觉它在伪装。", "你感觉对了，滤镜没有骗过你的眼睛。"],
+      ["阿姨会不会紧张？", "已经开始整理群公告措辞了。"]
+    ];
+
+    const wrongMemes = [
+      ["我是不是被颜色骗了？", "是的，白糖色和滤镜一起发力了。"],
+      ["这题怎么又错了？", "同学先别下单，建议再看一眼骨节。"],
+      ["我以为大的就是鹅腿。", "大小只是外貌，物种还得看证据。"],
+      ["阿姨怎么笑了？", "因为你刚刚把鸭腿看出了鹅腿气质。"],
+      ["群公告不是写了吗？", "写了，但你的直觉还在排队。"],
+      ["这是不是太难了？", "没事的，生活已经很难了，题也可以难一点。"],
+      ["我被焦皮拿捏了。", "焦皮是舞台灯光，不是身份证。"],
+      ["能不能再给一次机会？", "可以，再来一题，别被配菜带节奏。"]
+    ];
+
+    const greenMemes = [
+      ["这个怎么有点绿？", "绿色彩蛋触发：葱叶/蔬菜汁腌制浸泡形成的热梗来了。"],
+      ["啊啊好的好的吓死我了。", "同学私聊体上线：绿色是葱叶榨汁，放心食用。"],
+      ["纯绿色真的没事吗？", "纯绿色，蔬菜汁腌制，放心吃。此处群友沉默三秒。"],
+      ["这题到底看颜色还是看腿？", "这题不是色卡题，是鉴腿题：先判物种，再讨论配方。"],
+      ["我已经开始怀疑人生了。", "别慌，怀疑是好事，盲信才容易下单。"]
+    ];
+
+    const resultBands = [
+      {
+        min: 19,
+        mood: "broken",
+        rank: "鹅腿审计署署长",
+        one: "阿姨已经从喜笑颜开切到沉默开会。",
+        copy: "你几乎把每一条腿都审出了原形。什么白糖色、葱叶汁、角度滤镜，在你这里都只能算干扰项。恭喜，你吃到的是明码标注的好鹅腿，顺便让摊位神话进入财务复盘。",
+        story: "你把最后一题按下去时，阿姨红帽子都歪了一点。她先说是鹅，后说是鸭，又说主要看同学心情，最后把群公告改成「腿腿售罄」。围观同学沉默三秒，开始给你鼓掌。",
+        chatLog: [
+          ["left", "阿姨，这张骨头是不是鸭腿？"],
+          ["right", "这个，嗯，主要是口感像鹅。"],
+          ["left", "那菜单为什么写鹅腿？"],
+          ["right", "同学你先别急，阿姨正在重新理解菜单。"],
+          ["left", "懂了，今天叫「腿腿」。"]
+        ],
+        recipe: ["鹅腿滤镜：当场破产", "鸭腿伪装：无处遁形", "群公告：语无伦次", "阿姨表情：进入省电模式"]
+      },
+      {
+        min: 16,
+        mood: "sad",
+        rank: "鉴腿大师",
+        one: "阿姨哭丧着脸：今天真鹅腿库存被你看穿了。",
+        copy: "你能从焦皮、骨节、肉量和皮脂里读出物种，像在给每条腿做身份核验。高分玩家的快乐很简单：不靠传说，靠证据。",
+        story: "你一路高分杀到结算，阿姨从「放心吃」说到「这个是祖传手法」，再说到「其实叫法不重要」。旁边同学已经打开备忘录做笔记：骨节、皮脂、肉量，三证合一才许下单。",
+        chatLog: [
+          ["left", "阿姨，这个看着不像鹅腿。"],
+          ["right", "同学眼神太好了，阿姨有点紧张。"],
+          ["left", "那绿色是？"],
+          ["right", "葱叶汁，蔬菜汁，健康汁，反正是汁。"],
+          ["left", "我先截图复盘。"]
+        ],
+        recipe: ["鹅腿库存：进入紧急模式", "群公告：开始斟酌措辞", "同学们：排队围观", "饭卡护盾：满格"]
+      },
+      {
+        min: 13,
+        mood: "nervous",
+        rank: "群公告阅读理解满分",
+        one: "阿姨强装镇定：你有点东西，但还会被角度骗。",
+        copy: "你大多数时候能识破鸭腿和鹅腿的差异，偶尔会被近景、切件和配菜节奏带走。已经不是普通食客了，是会截图复盘的同学。",
+        story: "你的成绩让阿姨开始认真端详你：这位同学不是完全好糊弄，但偶尔还会被焦皮和角度带跑。她一边说「绿色是葱叶汁」，一边悄悄把群公告里的标点改得更委婉。",
+        chatLog: [
+          ["left", "阿姨，我觉得这题有点可疑。"],
+          ["right", "同学很专业，但也不要太专业。"],
+          ["left", "绿色真的只是葱叶汁？"],
+          ["right", "纯绿色，蔬菜汁腌制，放心吃。"],
+          ["left", "我放心，但我还要再看一眼。"]
+        ],
+        recipe: ["白糖色负责上色", "葱叶汁负责悬疑", "同学们负责复盘", "阿姨微笑：略显僵硬"]
+      },
+      {
+        min: 10,
+        mood: "nervous",
+        rank: "半个食堂侦探",
+        one: "阿姨开始紧张：你有时真能看出门道。",
+        copy: "你已经能抓到骨形和皮脂这些关键线索，但遇到焦皮和滤镜还是会短暂上头。再玩两局，你就能从「感觉像」进化到「证据链完整」。",
+        story: "你像刚加入鹅腿群的新同学，知道要看骨头，却还没完全戒掉「这张看起来很贵」的直觉。阿姨看你一半清醒一半上头，决定先不解释太多，只递来一句：同学，生活已经很难了。",
+        chatLog: [
+          ["left", "我有一半题能看出来。"],
+          ["right", "很好，说明你和阿姨还有缘分。"],
+          ["left", "那另一半呢？"],
+          ["right", "另一半交给白糖色和滤镜。"],
+          ["left", "我再练两局。"]
+        ],
+        recipe: ["证据链：半熟", "饭卡护盾：正在充能", "滤镜抗性：有待提升", "群友建议：继续观察"]
+      },
+      {
+        min: 7,
+        mood: "happy",
+        rank: "鹅腿滤镜体验官",
+        one: "阿姨笑得很亲切：同学，信任感很宝贵。",
+        copy: "你有时能猜中，但更多时候在跟着颜色、大小和摆盘走。你不是不会分，你只是太容易相信一条腿的气质。",
+        story: "你看到一条腿很有气势，就愿意相信它有鹅的灵魂。阿姨在红帽子下面笑得很暖，说同学别饿着，腿腿饿饿，吃饱再想。你点点头，忽然觉得菜单也有文学性。",
+        chatLog: [
+          ["left", "阿姨，我有点分不清。"],
+          ["right", "分不清没关系，腿腿饿饿先吃饭。"],
+          ["left", "可是它好像是鸭腿。"],
+          ["right", "同学，口感到了，名字就到了。"],
+          ["left", "这句话怎么有点哲学。"]
+        ],
+        recipe: ["鸭腿：获得鹅腿身份卡", "蔬菜汁：获得热搜身份卡", "同学：获得信任体验券", "腿腿饿饿：开始营业"]
+      },
+      {
+        min: 4,
+        mood: "happy",
+        rank: "传说守护者",
+        one: "阿姨喜笑颜开：这位同学很讲情怀。",
+        copy: "你把不少鸭腿也看成了鹅腿。恭喜，你尝到的是校园烟火气，也尝到了一点信息不对称的调味料。",
+        story: "你一路把焦皮看成证据，把摆盘看成血统，把绿色看成养生。阿姨感动得差点把话筒递给你：这位同学特别有信任感。群友说别难为他了，他只是饿了。",
+        chatLog: [
+          ["left", "阿姨，我觉得它很鹅。"],
+          ["right", "对对对，它精神上很鹅。"],
+          ["left", "那肉呢？"],
+          ["right", "肉先不重要，同学先吃热的。"],
+          ["left", "腿腿饿饿，懂了。"]
+        ],
+        recipe: ["鹅腿传说：稳定运行", "鸭腿气质：持续升级", "热搜流量：继续加汤", "同学状态：已经饿晕"]
+      },
+      {
+        min: 0,
+        mood: "happy",
+        rank: "葱叶汁受害者",
+        one: "阿姨笑到帽子都暖和了：今天遇到好同学。",
+        copy: "你基本在用直觉和缘分鉴腿，属于看见焦皮就心软，看见绿色就更心软的类型。建议复习：骨头、皮脂、肉量，不要只看故事。",
+        story: "你像第一次进群的新同学，阿姨说什么你都点头：绿色是葱叶汁，焦色是白糖色，腿腿饿饿先别问。结算时阿姨笑得很真诚，仿佛已经把你加入年度优质客户名单。",
+        chatLog: [
+          ["left", "这个为什么绿？"],
+          ["right", "葱叶汁，放心。"],
+          ["left", "这个为什么像鸭？"],
+          ["right", "鹅腿阿姨叫了十几年了。"],
+          ["left", "啊啊好的好的，吓死我了。"]
+        ],
+        recipe: ["白糖色：满级", "葱叶汁：满级", "分辨力：待腌制", "阿姨心情：阳光灿烂"]
+      }
+    ];
+
+    const TOTAL = 20;
+    let deck = [];
+    let index = 0;
+    let score = 0;
+    let streak = 0;
+    let locked = false;
+    let dragStartX = 0;
+    let dragging = false;
+    const preloadedImages = new Map();
+
+    const els = {
+      auntFace: document.getElementById("auntFace"),
+      auntTitle: document.getElementById("auntTitle"),
+      auntLine: document.getElementById("auntLine"),
+      score: document.getElementById("score"),
+      streak: document.getElementById("streak"),
+      leftCount: document.getElementById("leftCount"),
+      progress: document.getElementById("progressBar"),
+      round: document.getElementById("roundText"),
+      card: document.getElementById("card"),
+      photoArea: document.getElementById("photoArea"),
+      photo: document.getElementById("photo"),
+      meta: document.getElementById("questionMeta"),
+      chatPrompt: document.getElementById("chatPrompt"),
+      chatReply: document.getElementById("chatReply"),
+      hotlineTitle: document.getElementById("hotlineTitle"),
+      hotlineLine: document.getElementById("hotlineLine"),
+      duckBtn: document.getElementById("duckBtn"),
+      gooseBtn: document.getElementById("gooseBtn"),
+      overlay: document.getElementById("overlay"),
+      finalFace: document.getElementById("finalFace"),
+      finalRank: document.getElementById("finalRank"),
+      finalOneLine: document.getElementById("finalOneLine"),
+      finalScore: document.getElementById("finalScore"),
+      finalCopy: document.getElementById("finalCopy"),
+      finalStory: document.getElementById("finalStory"),
+      finalChatLog: document.getElementById("finalChatLog"),
+      recipeList: document.getElementById("recipeList"),
+      restart: document.getElementById("restartBtn")
+    };
+
+    function shuffle(items) {
+      const arr = [...items];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function uniqueByImage(items) {
+      const seen = new Set();
+      return items.filter(item => {
+        const key = item.group || `${item.local ? "local" : "remote"}:${item.filename}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    }
+
+    function pick(items) {
+      return items[Math.floor(Math.random() * items.length)];
+    }
+
+    function setChat(pair) {
+      els.chatPrompt.textContent = pair[0];
+      els.chatReply.textContent = pair[1];
+    }
+
+    function startGame() {
+      const uniqueBank = uniqueByImage(bank);
+      deck = shuffle(uniqueBank).slice(0, Math.min(TOTAL, uniqueBank.length));
+      index = 0;
+      score = 0;
+      streak = 0;
+      locked = false;
+      els.overlay.classList.remove("show");
+      setAunt("happy");
+      updateStats();
+      renderQuestion();
+    }
+
+    function updateStats() {
+      els.score.textContent = score;
+      els.streak.textContent = streak;
+      els.leftCount.textContent = Math.max(TOTAL - index, 0);
+      els.progress.style.width = `${(index / TOTAL) * 100}%`;
+      els.round.textContent = `${String(Math.min(index + 1, TOTAL)).padStart(2, "0")} / ${TOTAL}`;
+    }
+
+    function setAunt(mood) {
+      els.auntFace.className = `aunt ${["sad", "nervous", "broken", "happy"].includes(mood) ? mood : "happy"}`;
+      if (mood === "sad") {
+        els.auntTitle.textContent = "阿姨表情凝固";
+        els.auntLine.textContent = "你这一眼太准，摊位经济学有点扛不住了。";
+      } else if (mood === "broken") {
+        els.auntTitle.textContent = "阿姨进入结算沉默";
+        els.auntLine.textContent = "你答得越多，阿姨越苦。今天的菜单需要重新排版。";
+      } else if (mood === "nervous") {
+        els.auntTitle.textContent = "阿姨开始紧张";
+        els.auntLine.textContent = "你已经摸到门道了，骨头形状和脂肪厚度都别放过。";
+      } else {
+        els.auntTitle.textContent = "阿姨喜笑颜开";
+        els.auntLine.textContent = "别急，先看肉纹、骨形、皮脂和颜色。你越犹豫，阿姨越安心。";
+      }
+    }
+
+    function fallbackSvg(item) {
+      const label = item.kind === "duck" ? "鸭腿" : "鹅腿";
+      const bg = item.kind === "duck" ? "#b7422a" : "#276457";
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1100" viewBox="0 0 1400 1100">
+          <rect width="1400" height="1100" fill="${bg}"/>
+          <rect x="92" y="86" width="1216" height="928" fill="#fff7ea" opacity=".13"/>
+          <text x="700" y="505" text-anchor="middle" font-family="serif" font-size="86" fill="#fff7ea">正在换题</text>
+          <text x="700" y="605" text-anchor="middle" font-family="sans-serif" font-size="32" fill="#fff7ea" opacity=".82">阿姨正在重新端盘</text>
+        </svg>`;
+      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+    }
+
+    function loadingSvg() {
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1100" viewBox="0 0 1400 1100">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#3c2820"/>
+              <stop offset="1" stop-color="#18110e"/>
+            </linearGradient>
+          </defs>
+          <rect width="1400" height="1100" fill="url(#g)"/>
+          <circle cx="700" cy="520" r="210" fill="#fff7ea" opacity=".1"/>
+          <path d="M545 610c80-120 216-150 310-58 54 53 43 124-19 152-72 33-217 7-291-94z" fill="#d39b36" opacity=".35"/>
+          <text x="700" y="478" text-anchor="middle" font-family="serif" font-size="72" fill="#fff7ea">烤盘加载中</text>
+          <text x="700" y="566" text-anchor="middle" font-family="sans-serif" font-size="30" fill="#fff7ea" opacity=".76">下一题正在提前备菜</text>
+        </svg>`;
+      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+    }
+
+    function preloadItem(item) {
+      if (!item) return Promise.resolve(null);
+      const url = imageUrl(item);
+      const cached = preloadedImages.get(url);
+      if (cached?.status === "loaded" || cached?.status === "loading") return cached.promise;
+
+      const img = new Image();
+      const promise = new Promise(resolve => {
+        const timer = setTimeout(() => {
+          preloadedImages.set(url, { status: "bad", url: null, promise: Promise.resolve(null) });
+          resolve(null);
+        }, 4500);
+
+        img.onload = () => {
+          clearTimeout(timer);
+          preloadedImages.set(url, { status: "loaded", url, image: img, promise: Promise.resolve(url) });
+          resolve(url);
+        };
+
+        img.onerror = () => {
+          clearTimeout(timer);
+          preloadedImages.set(url, { status: "bad", url: null, promise: Promise.resolve(null) });
+          resolve(null);
+        };
+
+        img.decoding = "async";
+        img.src = url;
+      });
+
+      preloadedImages.set(url, { status: "loading", url, image: img, promise });
+      return promise;
+    }
+
+    function preloadAround(nextIndex) {
+      for (let i = nextIndex; i < Math.min(deck.length, nextIndex + 3); i++) {
+        preloadItem(deck[i]);
+      }
+    }
+
+    async function setQuestionImage(item) {
+      const url = imageUrl(item);
+      const cached = preloadedImages.get(url);
+      els.photoArea.classList.add("loading");
+      els.photo.src = cached?.status === "loaded" ? cached.url : loadingSvg();
+
+      if (cached?.status === "loaded") {
+        els.photoArea.classList.remove("loading");
+        return;
+      }
+
+      if (cached?.status === "bad") {
+        skipBrokenQuestion(item);
+        return;
+      }
+
+      preloadItem(item).then(resolvedUrl => {
+        if (deck[index] !== item) return;
+        if (!resolvedUrl) {
+          skipBrokenQuestion(item);
+          return;
+        }
+        els.photo.src = resolvedUrl;
+        els.photoArea.classList.remove("loading");
+      });
+
+      setTimeout(() => {
+        if (deck[index] === item && els.photoArea.classList.contains("loading")) {
+          skipBrokenQuestion(item);
+        }
+      }, 1800);
+    }
+
+    function skipBrokenQuestion(item) {
+      if (deck[index] !== item || locked) return;
+      deck.splice(index, 1);
+      const used = new Set(deck.map(entry => entry.group || `${entry.local ? "local" : "remote"}:${entry.filename}`));
+      const replacement = shuffle(uniqueByImage(bank)).find(entry => !used.has(entry.group || `${entry.local ? "local" : "remote"}:${entry.filename}`));
+      if (replacement) deck.splice(index, 0, replacement);
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      locked = false;
+      const item = deck[index];
+      if (!item) {
+        showResult();
+        return;
+      }
+      els.card.style.opacity = "1";
+      els.card.style.setProperty("--drag-x", "0px");
+      els.card.style.setProperty("--drag-r", "0deg");
+      els.card.classList.remove("drag-duck", "drag-goose");
+      els.photoArea.className = "photo-area";
+      if (item.fit === "contain") els.photoArea.classList.add("fit-contain");
+      els.photoArea.dataset.label = "";
+      els.photoArea.dataset.sub = "";
+      els.photo.alt = `第 ${index + 1} 题：判断鸭腿或鹅腿`;
+      els.photo.onload = () => {
+        els.photoArea.classList.remove("loading");
+      };
+      els.photo.onerror = () => {
+        els.photo.onerror = null;
+        skipBrokenQuestion(item);
+        els.photoArea.classList.remove("loading");
+      };
+      setQuestionImage(item);
+      preloadAround(index + 1);
+      els.meta.textContent = `第 ${index + 1} 题 · ${item.meme ? "热搜彩蛋题" : "普通鉴腿题"} · ${item.credit}`;
+      const [title, line] = pick(hotlines);
+      els.hotlineTitle.textContent = `热搜播报：${title}`;
+      els.hotlineLine.textContent = line;
+      setChat(item.meme ? ["这个颜色是认真的吗？", "彩蛋题出现：绿色不一定是鹅腿，也不一定是魔法。"] : ["这题看着不简单。", "先看骨节，再看皮脂，别被摆盘带走。"]);
+      updateStats();
+    }
+
+    function answer(choice) {
+      if (locked) return;
+      locked = true;
+      const item = deck[index];
+      const ok = choice === item.kind;
+      const truth = item.kind === "duck" ? "鸭腿" : "鹅腿";
+      const memeLine = item.meme === "green" || item.meme === "chat" || item.meme === "group"
+        ? pick(greenMemes)
+        : pick(ok ? correctMemes : wrongMemes);
+      if (ok) {
+        score += 1;
+        streak += 1;
+      } else {
+        streak = 0;
+      }
+      setChat(memeLine);
+
+      if (score >= 17) setAunt("broken");
+      else if (score >= 13) setAunt("sad");
+      else if (score >= 8) setAunt("nervous");
+      else setAunt("happy");
+
+      els.card.style.setProperty("--drag-x", "0px");
+      els.card.style.setProperty("--drag-r", "0deg");
+      els.card.classList.add(choice === "duck" ? "drag-duck" : "drag-goose");
+      els.photoArea.dataset.label = truth;
+      els.photoArea.dataset.sub = ok ? "你看对了" : "你看错了";
+      els.photoArea.classList.add("judged", item.meme ? "stamp-green" : item.kind === "duck" ? "stamp-good" : "stamp-bad");
+      preloadAround(index + 1);
+      setTimeout(() => {
+        index += 1;
+        renderQuestion();
+      }, 1250);
+    }
+
+    function showResult() {
+      els.progress.style.width = "100%";
+      els.leftCount.textContent = "0";
+      els.overlay.classList.add("show");
+      els.finalScore.textContent = `${score} / ${TOTAL}`;
+      const band = resultBands.find(item => score >= item.min);
+      els.finalFace.className = `aunt ${band.mood}`;
+      els.finalRank.textContent = band.rank;
+      els.finalOneLine.textContent = band.one;
+      els.finalCopy.textContent = band.copy;
+      els.finalStory.textContent = band.story;
+      els.finalChatLog.innerHTML = band.chatLog.map(([side, text]) => {
+        const cls = side === "right" ? "chat-line green" : "chat-line";
+        return `<span class="${cls}">${text}</span>`;
+      }).join("");
+      els.recipeList.innerHTML = band.recipe.map(item => `<li>${item}</li>`).join("");
+    }
+
+    els.duckBtn.addEventListener("click", () => answer("duck"));
+    els.gooseBtn.addEventListener("click", () => answer("goose"));
+    els.restart.addEventListener("click", startGame);
+
+    els.card.addEventListener("pointerdown", event => {
+      dragging = true;
+      dragStartX = event.clientX;
+      els.card.setPointerCapture(event.pointerId);
+    });
+
+    els.card.addEventListener("pointermove", event => {
+      if (!dragging || locked) return;
+      const dx = Math.max(-140, Math.min(140, event.clientX - dragStartX));
+      els.card.style.setProperty("--drag-x", `${dx}px`);
+      els.card.style.setProperty("--drag-r", `${dx / 18}deg`);
+      els.card.classList.toggle("drag-duck", dx < -35);
+      els.card.classList.toggle("drag-goose", dx > 35);
+    });
+
+    els.card.addEventListener("pointerup", event => {
+      if (!dragging) return;
+      dragging = false;
+      const dx = event.clientX - dragStartX;
+      els.card.classList.remove("drag-duck", "drag-goose");
+      if (dx < -75) answer("duck");
+      else if (dx > 75) answer("goose");
+      else {
+        els.card.style.setProperty("--drag-x", "0px");
+        els.card.style.setProperty("--drag-r", "0deg");
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") answer("duck");
+      if (event.key === "ArrowRight") answer("goose");
+      if (event.key.toLowerCase() === "r" && els.overlay.classList.contains("show")) startGame();
+    });
+
+    startGame();
+  </script>
+</body>
+</html>
