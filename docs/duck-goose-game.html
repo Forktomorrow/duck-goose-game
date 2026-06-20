@@ -589,10 +589,11 @@
       position: fixed;
       inset: 0;
       display: none;
-      place-items: center;
+      place-items: start center;
       padding: 20px;
       background: rgba(37, 25, 20, 0.52);
       z-index: 10;
+      overflow-y: auto;
     }
 
     .overlay.show { display: grid; }
@@ -605,6 +606,7 @@
       box-shadow: 0 30px 80px rgba(20, 12, 6, 0.35);
       display: grid;
       gap: 18px;
+      margin: auto 0;
     }
 
     .final-aunt-card {
@@ -723,6 +725,11 @@
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
+      position: sticky;
+      bottom: -1px;
+      z-index: 2;
+      padding: 12px 0 0;
+      background: #fff7ea;
     }
 
     .plain-btn {
@@ -808,7 +815,7 @@
       .choice { min-height: 58px; font-size: 18px; }
       .feedback { min-height: 64px; font-size: 19px; padding: 14px; }
       .status-line { grid-template-columns: 1fr; }
-      .result { padding: 16px; max-height: calc(100vh - 24px); overflow: auto; }
+      .result { padding: 16px; max-height: none; overflow: visible; margin: 0; }
       .final-aunt-card { grid-template-columns: 96px 1fr; }
       .final-aunt-card .aunt { width: 96px; height: 116px; }
       .final-aunt-card .aunt::before { width: 82px; height: 42px; top: -15px; left: 7px; }
@@ -949,25 +956,25 @@
       { kind: "duck", local: true, group: "duck-cassoulet-braised-white-bean-duck-leg-confit-garlic-sausage-pork-belly-508355", fit: "cover", filename: "openverse50/duck-cassoulet-braised-white-bean-duck-leg-confit-garlic-sausage-pork-belly-508355.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-cassoulet-of-duck-leg-lamb-sausage-house-bacon-and-cannelini-beans-785709", fit: "cover", filename: "openverse50/duck-cassoulet-of-duck-leg-lamb-sausage-house-bacon-and-cannelini-beans-785709.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-confit-duck-leg-guillaume-at-bennelong-163943", fit: "cover", filename: "openverse50/duck-confit-duck-leg-guillaume-at-bennelong-163943.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-confit-duck-leg-guillaume-at-bennelong-880691", fit: "cover", filename: "openverse50/duck-confit-duck-leg-guillaume-at-bennelong-880691.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-confit-duck-leg-guillaume-at-bennelong-by-julia-322132", fit: "cover", filename: "openverse50/duck-confit-duck-leg-guillaume-at-bennelong-by-julia-322132.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-confit-duck-leg-guillaume-at-bennelong-by-julia-54719", fit: "cover", filename: "openverse50/duck-confit-duck-leg-guillaume-at-bennelong-by-julia-54719.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-confit-duck-leg-salad-491515", fit: "cover", filename: "openverse50/duck-confit-duck-leg-salad-491515.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-confit-duck-leg-with-braised-lentils-winter-greens-and-jus-gras-bistro-958150", fit: "cover", filename: "openverse50/duck-confit-duck-leg-with-braised-lentils-winter-greens-and-jus-gras-bistro-958150.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-confit-duck-leg-with-du-puy-lentils-bistro-vue-584300", fit: "cover", filename: "openverse50/duck-confit-duck-leg-with-du-puy-lentils-bistro-vue-584300.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-confit-foie-gras-and-duck-fat-fries-at-au-fil-des-saisons-109767", fit: "cover", filename: "openverse50/duck-confit-foie-gras-and-duck-fat-fries-at-au-fil-des-saisons-109767.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-crispy-duck-leg-confit-sonoma-valley-liberty-duck-warm-mushroom-salad--499671", fit: "cover", filename: "openverse50/duck-crispy-duck-leg-confit-sonoma-valley-liberty-duck-warm-mushroom-salad--499671.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-duck-961746", fit: "cover", filename: "openverse50/duck-duck-961746.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-duck-leg-178759", fit: "cover", filename: "openverse50/duck-duck-leg-178759.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-duck-leg-480578", fit: "cover", filename: "openverse50/duck-duck-leg-480578.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-duck-leg-confit-196116", fit: "cover", filename: "openverse50/duck-duck-leg-confit-196116.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-duck-leg-confit-with-kipfler-potato-salad-and-jus-gras-jones-the-groce-22568", fit: "cover", filename: "openverse50/duck-duck-leg-confit-with-kipfler-potato-salad-and-jus-gras-jones-the-groce-22568.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-duck-leg-confit-with-kipfler-potato-salad-and-jus-gras-jones-the-groce-763465", fit: "cover", filename: "openverse50/duck-duck-leg-confit-with-kipfler-potato-salad-and-jus-gras-jones-the-groce-763465.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-duck-leg-noodles-at-hai-ky-mi-gia-337607", fit: "cover", filename: "openverse50/duck-duck-leg-noodles-at-hai-ky-mi-gia-337607.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-duck-leg-noodles-at-hai-ky-mi-gia-619455", fit: "cover", filename: "openverse50/duck-duck-leg-noodles-at-hai-ky-mi-gia-619455.jpg", credit: "Openverse 本地鸭腿题库" },
+      { kind: "duck", local: true, group: "duck-duck-leg-noodles-at-hai-ky-mi-gia-704231", fit: "cover", filename: "openverse50/duck-duck-leg-noodles-at-hai-ky-mi-gia-704231.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-duck-san-choi-bow-103643", fit: "cover", filename: "openverse50/duck-duck-san-choi-bow-103643.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-ginger-chili-duck-leg-crispy-sushi-rice-pickled-ginger-radish-greens-283657", fit: "cover", filename: "openverse50/duck-ginger-chili-duck-leg-crispy-sushi-rice-pickled-ginger-radish-greens-283657.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-noodles-with-stewed-duck-in-chinese-herbs-proud-peacock-aud9-545326", fit: "cover", filename: "openverse50/duck-noodles-with-stewed-duck-in-chinese-herbs-proud-peacock-aud9-545326.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-smoked-duck-leg-at-t-t-296762", fit: "cover", filename: "openverse50/duck-smoked-duck-leg-at-t-t-296762.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-speck-confit-duck-leg-guillaume-at-bennelong-105405", fit: "cover", filename: "openverse50/duck-speck-confit-duck-leg-guillaume-at-bennelong-105405.jpg", credit: "Openverse 本地鸭腿题库" },
-      { kind: "duck", local: true, group: "duck-speck-confit-duck-leg-guillaume-at-bennelong-7912", fit: "cover", filename: "openverse50/duck-speck-confit-duck-leg-guillaume-at-bennelong-7912.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "duck", local: true, group: "duck-waterleaf-duck-leg-confit-623411", fit: "cover", filename: "openverse50/duck-waterleaf-duck-leg-confit-623411.jpg", credit: "Openverse 本地鸭腿题库" },
       { kind: "goose", local: true, group: "goose-at-yue-kee-roasted-goose-restaurant-301496", fit: "cover", filename: "openverse50/goose-at-yue-kee-roasted-goose-restaurant-301496.jpg", credit: "Openverse 本地鹅腿题库" },
       { kind: "goose", local: true, group: "goose-cold-plate-jellyfish-cucumber-jiaji-duck-and-roast-goose-575096", fit: "cover", filename: "openverse50/goose-cold-plate-jellyfish-cucumber-jiaji-duck-and-roast-goose-575096.jpg", credit: "Openverse 本地鹅腿题库" },
@@ -1150,6 +1157,7 @@
     ];
 
     const TOTAL = 20;
+    const EACH_KIND = TOTAL / 2;
     let deck = [];
     let index = 0;
     let score = 0;
@@ -1218,16 +1226,51 @@
       els.chatReply.textContent = pair[1];
     }
 
-    function startGame() {
+    function buildBalancedDeck() {
       const uniqueBank = uniqueByImage(bank);
-      deck = shuffle(uniqueBank).slice(0, Math.min(TOTAL, uniqueBank.length));
+      const ducks = shuffle(uniqueBank.filter(item => item.kind === "duck")).slice(0, EACH_KIND);
+      const geese = shuffle(uniqueBank.filter(item => item.kind === "goose")).slice(0, EACH_KIND);
+      return shuffle([...ducks, ...geese]).slice(0, TOTAL);
+    }
+
+    async function prepareDeckImages() {
+      els.duckBtn.disabled = true;
+      els.gooseBtn.disabled = true;
+      els.photoArea.className = "photo-area loading";
+      els.photo.src = loadingSvg();
+      setChat(["开局备菜中。", "本局 20 张正在提前缓存，马上开鉴。"]);
+      await Promise.all(deck.map(item => preloadItem(item)));
+      const missing = deck.filter(item => preloadedImages.get(imageUrl(item))?.status !== "loaded");
+      if (missing.length) {
+        const used = new Set(deck.map(item => item.group || item.filename));
+        const replacements = shuffle(uniqueByImage(bank)).filter(item => {
+          const key = item.group || item.filename;
+          return !used.has(key) && !missing.includes(item);
+        });
+        for (const bad of missing) {
+          const idx = deck.indexOf(bad);
+          const next = replacements.shift();
+          if (next) {
+            deck[idx] = next;
+            await preloadItem(next);
+          }
+        }
+      }
+      els.duckBtn.disabled = false;
+      els.gooseBtn.disabled = false;
+    }
+
+    async function startGame() {
+      deck = buildBalancedDeck();
       index = 0;
       score = 0;
       streak = 0;
-      locked = false;
+      locked = true;
       els.overlay.classList.remove("show");
       setAunt("happy");
       updateStats();
+      await prepareDeckImages();
+      locked = false;
       renderQuestion();
     }
 
